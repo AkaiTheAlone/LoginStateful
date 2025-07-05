@@ -16,7 +16,8 @@ class LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             emailField(),
-            //passwordField(), submitButton()
+            passwordField(), 
+            submitButton()
           ],
         ),
       ),
@@ -33,7 +34,26 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Widget passwordField() {}
-  //
-  // Widget submitButton() {}
+  Widget passwordField() {
+    return TextFormField(
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: "Password",
+        hintText: "Your password",
+      ),
+    );
+  }
+
+Widget submitButton() {
+  return ElevatedButton(
+    onPressed: () {
+      // ação ao pressionar
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white, 
+    ),
+    child: Text("Submit"),
+  );
+  }
 }
