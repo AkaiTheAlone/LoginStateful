@@ -1,6 +1,8 @@
-# login_stateful
+# Login Stateful
 
 A new Flutter project.
+
+Made for learning, nothing hard will be done here.
 
 ## Getting Started
 
