@@ -39,7 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
         //return null if the input is valid
         //return a string if the input is invalid
 
-        //this wasnt necessary until dart 2.12, where null safety was introduced
+        //this wasn't necessary until dart 2.12, where null safety was introduced
         if (value == null || value.isEmpty) {
           return "Please enter your email address.";
         }
@@ -48,11 +48,14 @@ class LoginScreenState extends State<LoginScreen> {
         }
         return null; //input is valid
       },
+      onSaved: (String? value){
+          print("Email saved: $value");
+      },
     );
-    
   }
 
-  Widget passwordField() {
+  Widget passwordField() 
+  {
     // margin: EdgeInsets.only(bottom: 20.0),
     return TextFormField(
       obscureText: true,
@@ -60,7 +63,8 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: "Password",
         hintText: "Your password",
       ),
-      validator: (value){
+      validator: (value)
+      {
         if (value == null || value.isEmpty) {
           return "Please enter your password.";
         }
@@ -69,15 +73,30 @@ class LoginScreenState extends State<LoginScreen> {
         }
         return null; //input is valid
       },
+    onSaved: (String? value) {
+      //this is called when the form is submitted
+      //you can save the value to a variable or send it to a server
+      print("Password saved: $value");
+    },
     );  
-}
+  }
   
 
 Widget submitButton() {
   return ElevatedButton(
     onPressed: () {
       //reset -> clear the form
-      print(formKey.currentState?.validate());
+      //print(formKey.currentState?.validate());
+      if (formKey.currentState?.validate() ?? false) 
+      {
+        formKey.currentState?.save();
+        print("Email and password posted successfully!"); 
+        //if the form is valid, save the values
+        //this one only works in scaffold
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text("Form submitted successfully!")),
+        // );
+      }
     },
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.blue,
