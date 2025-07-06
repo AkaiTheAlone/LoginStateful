@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../mixins/validations_mixins.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -7,7 +9,12 @@ class LoginScreen extends StatefulWidget {
   }
 }
 
-class LoginScreenState extends State<LoginScreen> {
+//with is a very important keyword in dart
+//it allows you to use mixins, which are a way to reuse code in multiple classes
+//mixins are like a class that can be used in multiple classes, but they don't have
+//to be instantiated. They are used to add functionality to a class without using inheritance.
+//in this case, we are using the ValidationsMixins mixin to add validation functionality
+class LoginScreenState extends State<LoginScreen> with ValidationsMixins {
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -35,18 +42,8 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: "Email Adress",
         hintText: "youremail@gmail.com",
       ),
-      validator: (String? value) {
-        //return null if the input is valid
-        //return a string if the input is invalid
-
-        //this wasn't necessary until dart 2.12, where null safety was introduced
-        if (value == null || value.isEmpty) {
-          return "Please enter your email address.";
-        }
-        if (!value.contains("@") || value.isEmpty) {
-          return "Please enter a valid email address.";
-        }
-        return null; //input is valid
+      validator:validateEmail, //this is a method from the mixin ValidationsMixins{
+       
       },
       onSaved: (String? value){
           print("Email saved: $value");
@@ -63,16 +60,7 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: "Password",
         hintText: "Your password",
       ),
-      validator: (value)
-      {
-        if (value == null || value.isEmpty) {
-          return "Please enter your password.";
-        }
-        if (value.length < 6) {
-          return "Password must be at least 6 characters long.";
-        }
-        return null; //input is valid
-      },
+      validator: validatePassword, //this is a method from the mixin ValidationsMixins
     onSaved: (String? value) {
       //this is called when the form is submitted
       //you can save the value to a variable or send it to a server
