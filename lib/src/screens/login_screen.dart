@@ -42,9 +42,8 @@ class LoginScreenState extends State<LoginScreen> with ValidationsMixins {
         labelText: "Email Adress",
         hintText: "youremail@gmail.com",
       ),
-      validator:validateEmail, //this is a method from the mixin ValidationsMixins{
-       
-      },
+      validator:validateEmail, 
+      //this is a method from the mixin ValidationsMixins{
       onSaved: (String? value){
           print("Email saved: $value");
       },
